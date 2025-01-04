@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Exercício</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+</head>
+<body>
+    <header></header>
+    <div class="main-content">
+        <h1 th:text="${Exercicio.nome}">Nome do Exercício</h1>
+        <p><strong>Como Se Realiza:</strong> <span th:text="${Exercicio.comoSeRealiza}">Como Se Realiza</span></p>
+        <p><strong>Grupo Muscular:</strong> <span th:text="${Exercicio.grupoMuscular}">Grupo Muscular</span></p>
+        <a href="/Exercicios" class="button-link">Voltar</a>
+    </div>
+</body>
+</html>

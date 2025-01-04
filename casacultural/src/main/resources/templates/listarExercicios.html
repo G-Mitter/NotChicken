@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Exercícios</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+</head>
+<body>
+    <header></header>
+    <div class="main-content">
+        <h1>Exercícios Cadastrados</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome do Exercício</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="exercicio : ${Exercicios}">
+                    <td th:text="${exercicio.nome}">Nome</td>
+                    <td>
+                        <a th:href="@{/Exercicios/detalhes(id=${exercicio.id})}" class="btn btn-info">Detalhes</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/Exercicios/novo" class="button-link">Cadastrar Novo Exercício</a>
+    </div>
+</body>
+</html>

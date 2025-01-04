@@ -1,0 +1,63 @@
+/* Estilo para o corpo da página */
+body {
+    background-color: #1c1a16;
+    color: white; /* Define o texto como branco */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para o header */
+header {
+    background-image: url('../imagens/frango.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+/* Espaçamento abaixo do cabeçalho */
+.main-content {
+    padding-top: 120px; /* Adiciona um padding para evitar que o conteúdo sobreponha o cabeçalho */
+}
+
+/* Estilo para os botões */
+button,
+a.button-link {
+    background-color: orange;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 0;
+    width: 200px;
+}
+
+/* Estilo para tabelas */
+.table th, .table td {
+    color: white; /* Define o texto da tabela como branco */
+}
+
+/* Estilo para os campos de texto */
+input[type="text"],
+textarea {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: #333;
+    display: block;
+    margin: 10px auto;
+    width: calc(100% - 40px);
+    max-width: 300px;
+}

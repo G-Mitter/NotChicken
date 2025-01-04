@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcular IMC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+</head>
+<body>
+    <header></header>
+    <div class="main-content">
+        <h1>Calcular IMC</h1>
+        <form action="/calcularImc" method="post">
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1" required>
+            <br>
+            <label for="altura">Altura (m):</label>
+            <input type="number" id="altura" name="altura" step="0.01" required>
+            <br>
+            <button type="submit">Calcular</button>
+        </form>
+        <div th:if="${imc != null}">
+            <h2>Seu IMC</h2>
+            <p th:text="'IMC: ' + ${imc}"></p>
+        </div>
+    </div>
+</body>
+</html>
