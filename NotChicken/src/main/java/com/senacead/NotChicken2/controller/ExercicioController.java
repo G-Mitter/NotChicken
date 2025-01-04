@@ -16,32 +16,34 @@ public class ExercicioController {
     private ExercicioService exercicioService;
 
     @GetMapping("/")
-    public String inicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, Model model) {
-        model.addAttribute("css", tema);
+    public String inicio() {
         return "index";
     }
 
     @GetMapping("/exercicios")
-    public String listarExercicios(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, Model model) {
+    public String listarExercicios(Model model) {
         List<Exercicio> exercicios = exercicioService.listarExercicios();
         model.addAttribute("exercicios", exercicios);
-        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "listarExercicios";
     }
 
     @GetMapping("/exercicios/detalhes")
-    public String detalhesExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @RequestParam("id") Long id, Model model) {
+    public String detalhesExercicio(@RequestParam("id") Long id, Model model) {
         Exercicio exercicio = exercicioService.buscarExercicio(id).orElse(null);
         model.addAttribute("exercicio", exercicio);
-        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "detalhesExercicio";
     }
 
+    @GetMapping("/exercicios/novo")
+    public String novoExercicio(Model model) {
+        model.addAttribute("exercicio", new Exercicio());
+        return "cadastrarExercicio";
+    }
+
     @GetMapping("/exercicios/editar/{id}")
-    public String editarExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @PathVariable Long id, Model model) {
+    public String editarExercicio(@PathVariable Long id, Model model) {
         Exercicio exercicio = exercicioService.buscarExercicio(id).orElse(null);
         model.addAttribute("exercicio", exercicio);
-        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "cadastrarExercicio";
     }
 
@@ -52,9 +54,8 @@ public class ExercicioController {
     }
 
     @PutMapping("/exercicios/atualizar/{id}")
-    public String atualizarExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado, Model model) {
+    public String atualizarExercicio(@PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado) {
         exercicioService.atualizarExercicio(id, exercicioAtualizado);
-        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "redirect:/exercicios/detalhes?id=" + id;
     }
 
@@ -62,5 +63,17 @@ public class ExercicioController {
     public String deletarExercicio(@PathVariable Long id) {
         exercicioService.deletarExercicio(id);
         return "redirect:/exercicios";
+    }
+
+    @GetMapping("/calcularImc")
+    public String calcularImcForm() {
+        return "calcularImc";
+    }
+
+    @PostMapping("/calcularImc")
+    public String calcularImc(@RequestParam("peso") double peso, @RequestParam("altura") double altura, Model model) {
+        double imc = peso / (altura * altura);
+        model.addAttribute("imc", imc);
+        return "calcularImc";
     }
 }

@@ -5,14 +5,37 @@
     <title>Detalhes do Exercício</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Css/styles.css">
+    <style>
+        .section {
+            background-color: transparent;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: none; 
+            box-shadow: none; 
+        }
+        .section h2 {
+            margin-top: 0;
+        }
+        .list-group-item {
+            background-color: transparent; 
+            border: none; 
+        }
+    </style>
 </head>
 <body>
-    <header></header>
-    <div class="main-content">
-        <h1 th:text="${Exercicio.nome}">Nome do Exercício</h1>
-        <p><strong>Como Se Realiza:</strong> <span th:text="${Exercicio.comoSeRealiza}">Como Se Realiza</span></p>
-        <p><strong>Grupo Muscular:</strong> <span th:text="${Exercicio.grupoMuscular}">Grupo Muscular</span></p>
-        <a href="/Exercicios" class="button-link">Voltar</a>
+    <div class="container">
+        <h1 class="mt-5 text-center" th:text="${exercicio.nome}">Nome do Exercício</h1>
+        
+        <div class="section">
+            <p><strong>Como Se Realiza:</strong> <span th:text="${exercicio.comoSeRealiza}">Descrição do Exercício</span></p>
+            <p><strong>Grupo Muscular:</strong> <span th:text="${exercicio.grupoMuscular}">Grupo Muscular</span></p>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a class="btn btn-secondary" href="/exercicios">Voltar</a>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

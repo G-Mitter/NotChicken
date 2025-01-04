@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Not Chicken - Página Principal</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="Css/styles.css">
-    </head>
-    <body>
-        <header></header>
-        <h1>Bem-vindo ao Not Chicken </h1>
-        <p>Escolha uma das opções abaixo para navegar pelo site:</p>
-
-        <a href="/Exercicios" class="button-link">Listar Exercicios</a>
-        <a href="/Exercicios/novo" class="button-link">Cadastrar Exercicio</a>
-        <a href="/calcularImc" class="button-link">Calcular IMC</a>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Chicken - Página Principal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Bem-vindo ao Not Chicken</h1>
+        <p class="text-center">Escolha uma das opções abaixo para navegar pelo site:</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="/exercicios" class="btn btn-primary btn-block">Listar Exercícios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="/exercicios/novo" class="btn btn-primary btn-block">Cadastrar Exercício</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="/calcularImc" class="btn btn-primary btn-block">Calcular IMC</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

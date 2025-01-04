@@ -23,5 +23,5 @@ public class Exercicio {
     private Long id;
     private String nome;
     private String comoSeRealiza;
-    private String GrupoMuscular;
+    private String grupoMuscular;
 }

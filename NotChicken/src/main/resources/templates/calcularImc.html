@@ -10,7 +10,7 @@
     <header></header>
     <div class="main-content">
         <h1>Calcular IMC</h1>
-        <form action="/calcularImc" method="post">
+        <form th:action="@{/calcularImc}" method="post">
             <label for="peso">Peso (kg):</label>
             <input type="number" id="peso" name="peso" step="0.1" required>
             <br>

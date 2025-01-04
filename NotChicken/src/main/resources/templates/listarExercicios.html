@@ -7,26 +7,27 @@
     <link rel="stylesheet" href="/Css/styles.css">
 </head>
 <body>
-    <header></header>
-    <div class="main-content">
-        <h1>Exercícios Cadastrados</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nome do Exercício</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="exercicio : ${Exercicios}">
-                    <td th:text="${exercicio.nome}">Nome</td>
-                    <td>
-                        <a th:href="@{/Exercicios/detalhes(id=${exercicio.id})}" class="btn btn-info">Detalhes</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="/Exercicios/novo" class="button-link">Cadastrar Novo Exercício</a>
+    <div class="container">
+        <h1 class="mt-5 text-center">Exercícios Cadastrados</h1>
+        <div class="section mt-4">
+            <div class="section-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="exercicio : ${exercicios}">
+                        <span th:text="${exercicio.nome}"></span>
+                        <a th:href="@{/exercicios/detalhes(id=${exercicio.id})}" class="btn btn-info btn-sm ml-2">Detalhes</a>
+                        <a th:href="@{/exercicios/editar/{id}(id=${exercicio.id})}" class="btn btn-primary btn-sm ml-2">Editar</a>
+                        <form th:action="@{/exercicios/deletar/{id}(id=${exercicio.id})}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm ml-2" onclick="return confirm('Tem certeza que deseja deletar este exercício?');">Deletar</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="/exercicios/novo">Cadastrar Novo Exercício</a>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

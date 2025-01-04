@@ -44,6 +44,6 @@ public class ExercicioService {
             exercicioRepository.delete(exercicio.get());
             return true;
         }
-        return false;
+        return false; 
     }
 }

@@ -1,31 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Exercício</title>
+    <title>Cadastrar/Editar Exercício</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Css/styles.css">
-
 </head>
 <body>
-    <header></header>
-    <h1>Cadastrar Exercício</h1>
-    <form action="/Exercicios" method="post" th:object="${Exercicio}">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" th:field="*{nome}" required>
-        <br>
-        <label for="comoSeRealiza">Como Se Realiza:</label>
-        <textarea id="comoSeRealiza" name="comoSeRealiza" th:field="*{comoSeRealiza}" required></textarea>
-        <br>
-        <label for="GrupoMuscular">Grupo Muscular:</label>
-        <input type="text" id="GrupoMuscular" name="GrupoMuscular" th:field="*{GrupoMuscular}" required>
-        <br>
-        <button type="submit">Cadastrar</button>
-    </form>
-    <a href="/" class="button-link">Voltar</a>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <div class="container">
+        <h1 class="mt-5 text-center" th:text="${exercicio.id == null ? 'Cadastrar Exercício' : 'Editar Exercício'}">Cadastrar/Editar Exercício</h1>
+        <div class="section mt-4">
+            <div class="section-body">
+                <form th:action="@{${exercicio.id == null} ? '/exercicios' : '/exercicios/atualizar/' + ${exercicio.id}}" th:object="${exercicio}" method="post">
+                    <input type="hidden" name="_method" th:value="${exercicio.id == null ? 'POST' : 'PUT'}">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" class="form-control" th:field="*{nome}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comoSeRealiza">Como Se Realiza:</label>
+                        <textarea id="comoSeRealiza" name="comoSeRealiza" class="form-control" th:field="*{comoSeRealiza}" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="grupoMuscular">Grupo Muscular:</label>
+                        <input type="text" id="grupoMuscular" name="grupoMuscular" class="form-control" th:field="*{grupoMuscular}" required>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <a class="btn btn-secondary" href="/exercicios">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
