@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="/Css/styles.css">
 </head>
 <body>
+    <header></header>
     <div class="container">
         <h1 class="mt-5 text-center">Exercícios Cadastrados</h1>
         <div class="section mt-4">
             <div class="section-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:each="exercicio : ${exercicios}">
-                        <span th:text="${exercicio.nome}"></span>
+                    <li class="list-group-item" th:each="exercicio : ${exercicios}" style="background-color: transparent;">
+                        <span th:text="${exercicio.nome}" style="color: white;"></span>
                         <a th:href="@{/exercicios/detalhes(id=${exercicio.id})}" class="btn btn-info btn-sm ml-2">Detalhes</a>
                         <a th:href="@{/exercicios/editar/{id}(id=${exercicio.id})}" class="btn btn-primary btn-sm ml-2">Editar</a>
                         <form th:action="@{/exercicios/deletar/{id}(id=${exercicio.id})}" method="post" class="d-inline">

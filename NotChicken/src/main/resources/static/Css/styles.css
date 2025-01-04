@@ -9,7 +9,7 @@ body {
 
 /* Estilo para o header */
 header {
-    background-image: url('../imagens/frango.png');
+    background-image: url('/imagens/frango.png');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100px;
@@ -28,7 +28,7 @@ header {
 /* Estilo para os botões */
 button,
 a.button-link {
-    background-color: orange;
+    background-color: orange; /* Define a cor de fundo como laranja */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -38,7 +38,7 @@ a.button-link {
     font-size: 16px;
     margin: 10px auto;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 4px; /* Adiciona cantos arredondados */
     width: 200px;
 }
 
@@ -60,4 +60,10 @@ textarea {
     margin: 10px auto;
     width: calc(100% - 40px);
     max-width: 300px;
+}
+
+/* Estilo para os itens da lista */
+.list-group-item {
+    background-color: transparent; /* Remove a cor de fundo dos itens da lista */
+    border: none; /* Remove a borda */
 }

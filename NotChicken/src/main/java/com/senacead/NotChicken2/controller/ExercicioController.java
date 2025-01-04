@@ -53,7 +53,7 @@ public class ExercicioController {
         return "redirect:/exercicios";
     }
 
-    @PutMapping("/exercicios/atualizar/{id}")
+    @PostMapping("/exercicios/atualizar/{id}")
     public String atualizarExercicio(@PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado) {
         exercicioService.atualizarExercicio(id, exercicioAtualizado);
         return "redirect:/exercicios/detalhes?id=" + id;
