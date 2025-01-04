@@ -1,71 +1,66 @@
 package com.senacead.NotChicken2.controller;
 
 import com.senacead.NotChicken2.model.Exercicio;
+import com.senacead.NotChicken2.service.ExercicioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Controller
 public class ExercicioController {
 
-    private List<Exercicio> exercicios = new ArrayList<>();
+    @Autowired
+    private ExercicioService exercicioService;
 
     @GetMapping("/")
-    public String home() {
+    public String inicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, Model model) {
+        model.addAttribute("css", tema);
         return "index";
     }
 
-    // Essa aqui vai retornar a página de listar exercícios 
-    @GetMapping("/Exercicios")
-    public String listarExercicios(Model model) {
-        model.addAttribute("Exercicios", exercicios);
+    @GetMapping("/exercicios")
+    public String listarExercicios(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, Model model) {
+        List<Exercicio> exercicios = exercicioService.listarExercicios();
+        model.addAttribute("exercicios", exercicios);
+        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "listarExercicios";
     }
 
-    @GetMapping("/Exercicios/novo")
-    public String novoExercicio(Model model) {
-        model.addAttribute("Exercicio", new Exercicio());
+    @GetMapping("/exercicios/detalhes")
+    public String detalhesExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @RequestParam("id") Long id, Model model) {
+        Exercicio exercicio = exercicioService.buscarExercicio(id).orElse(null);
+        model.addAttribute("exercicio", exercicio);
+        model.addAttribute("css", tema); // Adiciona o tema ao modelo
+        return "detalhesExercicio";
+    }
+
+    @GetMapping("/exercicios/editar/{id}")
+    public String editarExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @PathVariable Long id, Model model) {
+        Exercicio exercicio = exercicioService.buscarExercicio(id).orElse(null);
+        model.addAttribute("exercicio", exercicio);
+        model.addAttribute("css", tema); // Adiciona o tema ao modelo
         return "cadastrarExercicio";
     }
 
-    @PostMapping("/Exercicios")
-    public String cadastrarExercicios(Exercicio exercicio) {
-        exercicio.setId((long) (exercicios.size() + 1));
-        exercicios.add(exercicio);
-
-        // Salvar no arquivo JSON
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            objectMapper.writeValue(new File("exercicios.json"), exercicios);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "redirect:/Exercicios";
+    @PostMapping("/exercicios")
+    public String adicionarExercicio(@ModelAttribute Exercicio exercicio) {
+        exercicioService.adicionarExercicio(exercicio);
+        return "redirect:/exercicios";
     }
 
-    @GetMapping("/Exercicios/detalhes")
-    public String detalhesExercicio(@RequestParam("id") Long id, Model model) {
-        Exercicio exercicio = exercicios.stream().filter(f -> f.getId().equals(id)).findFirst().orElse(null);
-        model.addAttribute("Exercicio", exercicio);
-        return "detalhesExercicio";
-    }
-    @GetMapping("/calcularImc")
-    public String mostrarCalculoImc() {
-        return "calcularImc";
+    @PutMapping("/exercicios/atualizar/{id}")
+    public String atualizarExercicio(@CookieValue(name = "pref-estilo", defaultValue = "claro") String tema, @PathVariable Long id, @ModelAttribute Exercicio exercicioAtualizado, Model model) {
+        exercicioService.atualizarExercicio(id, exercicioAtualizado);
+        model.addAttribute("css", tema); // Adiciona o tema ao modelo
+        return "redirect:/exercicios/detalhes?id=" + id;
     }
 
-    @PostMapping("/calcularImc")
-    public String calcularImc(@RequestParam("peso") double peso, @RequestParam("altura") double altura, Model model) {
-        double imc = peso / (altura * altura);
-        model.addAttribute("imc", imc);
-        return "calcularImc";
+    @PostMapping("/exercicios/deletar/{id}")
+    public String deletarExercicio(@PathVariable Long id) {
+        exercicioService.deletarExercicio(id);
+        return "redirect:/exercicios";
     }
 }
