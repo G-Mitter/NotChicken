@@ -1,7 +1,7 @@
 # Not Chicken
 
 # Status do projeto:
-terminado 
+	Concluido 
 
 # Tecnologias que serão aplicadas:
 	Java, mysql, git
